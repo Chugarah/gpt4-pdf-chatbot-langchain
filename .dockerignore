@@ -1,0 +1,19 @@
+# Ignore all files and directories that start with a dot
+.*
+
+# Ignore the node_modules directory and its contents
+node_modules/
+
+# Ignore files with certain extensions
+*.log
+*.txt
+*.md
+
+# Ignore the .git directory and its contents
+.git/
+
+# Ignore the .vscode directory and its contents
+.vscode/
+
+# Ignore any file or directory with the name "test"
+test
