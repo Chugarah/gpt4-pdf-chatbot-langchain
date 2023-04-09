@@ -1,0 +1,8 @@
+name: Oracle-Demo-1
+channels:
+  - conda-forge
+  - menpo
+  - defaults
+dependencies:
+  - nodejs
+  - git
