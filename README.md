@@ -58,10 +58,15 @@ And dont forgett to activate your environment.
    * Visit [openai](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) to retrieve API keys and insert into your .env file.
    * Visit [pinecone](https://www.pinecone.io/) to create and retrieve your API keys, and also retrieve your environment and index name from the dashboard.
 
-3. In the `config` folder, replace the `PINECONE_NAME_SPACE` with a `namespace` where you'd like
+3. In the `config/pinecone.ts` folder, change the `PINECONE_INDEX_NAME` with a `Index Name` you created in Pinecone. Example
+  
+    ```python
+    export const PINECONE_INDEX_NAME = 'demo-data';
+    ```
+
  to store your embeddings on Pinecone when you run `pnpm run ingest`. This namespace will later be used for queries and retrieval.
 
-4. In `utils/makechain.ts` chain change the `QA_PROMPT` for your own usecase. Change `modelName` in `new OpenAIChat` to `gpt-3.5-turbo`, if you don't have access to `gpt-4`. Please verify outside this repo that you have access to `gpt-4`, otherwise the application will not work with it.
+1. In `utils/makechain.ts` chain change the `QA_PROMPT` for your own usecase. Change `modelName` in `new OpenAIChat` to `gpt-3.5-turbo`, if you don't have access to `gpt-4`. Please verify outside this repo that you have access to `gpt-4`, otherwise the application will not work with it.
 
 ## Convert your PDF files to embeddings
 
