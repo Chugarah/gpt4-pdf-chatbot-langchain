@@ -58,15 +58,44 @@ And dont forgett to activate your environment.
    * Visit [openai](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) to retrieve API keys and insert into your .env file.
    * Visit [pinecone](https://www.pinecone.io/) to create and retrieve your API keys, and also retrieve your environment and index name from the dashboard.
 
-3. In the `config/pinecone.ts` folder, change the `PINECONE_INDEX_NAME` with a `Index Name` you created in Pinecone. Example
-  
-    ```python
-    export const PINECONE_INDEX_NAME = 'demo-data';
+
+3. We need to update two things: the Pinecone index name and namespaces. Namespaces are the folders you have in your docs folder.
+Example:
+
+    ```Bash
+    # This is a namespace. ==> space-sci 
+    docs/space-sci 
     ```
 
- to store your embeddings on Pinecone when you run `pnpm run ingest`. This namespace will later be used for queries and retrieval.
+    We need to edit two files: config/pinecone.ts.
 
-1. In `utils/makechain.ts` chain change the `QA_PROMPT` for your own usecase. Change `modelName` in `new OpenAIChat` to `gpt-3.5-turbo`, if you don't have access to `gpt-4`. Please verify outside this repo that you have access to `gpt-4`, otherwise the application will not work with it.
+   1. In the `config/pinecone.ts` folder, change the `PINECONE_INDEX_NAME` with a `Index Name` you created in Pinecone. Example
+
+       ```python
+       export const PINECONE_INDEX_NAME = 'demo-data';
+       ```
+
+   2. Now, we need to add or remove namespaces based on your docs folder. Remember that the namespaces need to exactly match the folder names. For example:
+
+       ```python
+        export const TOPICS = [
+        ## Name venus-atmosphere-life
+        {
+            TOPIC: 'Life in the Atmosphere of Venus',
+            NAMESPACE: 'venus-atmosphere-life', // MUST ONLY CONTAIN LOWER CASE LETTERS A-Z AND HYPHENS
+            PROMPT:
+            'What evidence is there that life exists in the atmosphere of Venus?',
+        },
+        # supreme-court-cases
+        {
+            TOPIC: 'Supreme Court Cases',
+            NAMESPACE: 'supreme-court-cases', // MUST ONLY CONTAIN LOWER CASE LETTERS A-Z AND HYPHENS
+            PROMPT: 'What precedent was set by Morse v. Frederick?',
+        },
+        ];
+       ```
+
+4. In `utils/makechain.ts` chain change the `QA_PROMPT` for your own usecase. Change `modelName` in `new OpenAIChat` to `gpt-3.5-turbo`, if you don't have access to `gpt-4`. Please verify outside this repo that you have access to `gpt-4`, otherwise the application will not work with it.
 
 ## Convert your PDF files to embeddings
 
@@ -130,7 +159,7 @@ to run the webserver and the chatbot.
 4. Run the Vector Generator. This is when you want to upload your document to Pinecone.
 
     ```Powershell
-    pnpm run ingest
+    npm run ingest
     ```
 
 5. To run the webserver and the chatbot
