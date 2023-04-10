@@ -125,7 +125,7 @@ to run the webserver and the chatbot.
 4. Run the Vector Generator. This is when you want to upload your document to Pinecone.
 
     ```Powershell
-    npm run ingest
+    pnpm run ingest
     ```
 
 5. To run the webserver and the chatbot
